@@ -23,6 +23,9 @@ const HeaderLinks = styled.ul`
   li {
     margin-right: 20px;
     font-size: 18px;
+    :hover {
+      color: gray;
+    }
   }
 `;
 
