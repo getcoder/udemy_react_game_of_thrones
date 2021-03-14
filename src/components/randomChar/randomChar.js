@@ -5,15 +5,22 @@ import ErrorMessage from "../errorMessage/errorMessage";
 import "./randomChar.css";
 
 export default class RandomChar extends Component {
-  constructor() {
-    super();
-    this.updateChar();
-  }
   state = {
     char: {},
     loading: true,
     error: false,
   };
+
+  componentDidMount() {
+    this.updateChar();
+    this.timerId = setInterval(this.updateChar, 3000);
+  }
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+  }
 
   gotService = new GotService();
 
@@ -57,19 +64,19 @@ const View = ({ char }) => {
       <ul className="list-group list-group-flush">
         <li className="list-group-item d-flex justify-content-between">
           <span className="term">Gender</span>
-          <span>{gender || "no information"}</span>
+          <span>{gender}</span>
         </li>
         <li className="list-group-item d-flex justify-content-between">
           <span className="term">Born </span>
-          <span>{born || "no information"}</span>
+          <span>{born}</span>
         </li>
         <li className="list-group-item d-flex justify-content-between">
           <span className="term">Died </span>
-          <span>{died || "no information"}</span>
+          <span>{died}</span>
         </li>
         <li className="list-group-item d-flex justify-content-between">
           <span className="term">Culture </span>
-          <span>{culture || "no information"}</span>
+          <span>{culture}</span>
         </li>
       </ul>
     </>

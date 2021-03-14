@@ -21,7 +21,10 @@ export default class GotService {
   }
 
   async getAllCharacters() {
-    const characters = await this.getResource(`/characters?page=5&pageSize=10`);
+    const randPage = Math.floor(Math.random() * 65);
+    const characters = await this.getResource(
+      `/characters?page=${randPage}&pageSize=10`
+    );
     return characters.map((char) => this._transformChar(char));
   }
 
@@ -39,32 +42,34 @@ export default class GotService {
   }
 
   _transformChar(char) {
+    const charId = char.url.slice(char.url.indexOf("characters/") + 11);
     return {
-      name: char.name,
-      gender: char.gender,
-      born: char.born,
-      died: char.died,
-      culture: char.culture,
+      id: charId,
+      name: char.name || "no information",
+      gender: char.gender || "no information",
+      born: char.born || "no information",
+      died: char.died || "no information",
+      culture: char.culture || "no information",
     };
   }
 
   _transformHouse(house) {
     return {
-      name: house.name,
-      region: house.region,
-      words: house.words,
-      titles: house.titles,
-      overlord: house.overlord,
-      ancestralWeapons: house.ancestralWeapons,
+      name: house.name || "no information",
+      region: house.region || "no information",
+      words: house.words || "no information",
+      titles: house.titles || "no information",
+      overlord: house.overlord || "no information",
+      ancestralWeapons: house.ancestralWeapons || "no information",
     };
   }
 
   _transformBook(book) {
     return {
-      name: book.name,
-      numberOfPages: book.numberOfPages,
-      publiser: book.publiser,
-      released: book.released,
+      name: book.name || "no information",
+      numberOfPages: book.numberOfPages || "no information",
+      publiser: book.publiser || "no information",
+      released: book.released || "no information",
     };
   }
 }
