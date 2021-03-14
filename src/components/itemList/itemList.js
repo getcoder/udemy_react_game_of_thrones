@@ -1,62 +1,44 @@
 import React, { Component } from "react";
 // import Spinner from "reactstrap/lib/Spinner";
 import Spinner from "../spinner/spinner";
-import GotService from "../../services/gotService";
 
 import "./itemList.css";
 
-// import { ListGroup, ListGroupItem } from "reactstrap";
-
 export default class ItemList extends Component {
   state = {
-    charList: null,
+    itemList: null,
   };
 
   componentDidMount() {
-    this.gotService.getAllCharacters().then((charList) => {
+    const { getData } = this.props;
+
+    getData().then((itemList) => {
       this.setState({
-        charList,
+        itemList,
       });
     });
   }
 
-  gotService = new GotService();
-
   renderItems(arr) {
-    console.log(arr);
     return arr.map((item) => {
+      const label = this.props.renderItem(item);
       return (
         <li
           key={item.id}
-          onClick={() => this.props.onCharSelected(item.id)}
+          onClick={() => this.props.onItemSelected(item.id)}
           className="list-group-item"
         >
-          {item.name}
+          {label}
         </li>
       );
     });
   }
 
   render() {
-    const { charList } = this.state;
+    const { itemList } = this.state;
 
-    const content = charList ? this.renderItems(charList) : <Spinner />;
+    const content = itemList ? this.renderItems(itemList) : <Spinner />;
 
-    return (
-      <ul className="item-list list-group">
-        {content}
-        {/* <ListGroup>
-          <ListGroupItem active tag="a" href="#" action>
-            John Snow
-          </ListGroupItem>
-          <ListGroupItem tag="a" href="#" action>
-            Brandon Stark
-          </ListGroupItem>
-          <ListGroupItem tag="a" href="#" action>
-            Geremy
-          </ListGroupItem>
-        </ListGroup> */}
-      </ul>
-    );
+    return <ul className="item-list list-group">{content}</ul>;
   }
 }

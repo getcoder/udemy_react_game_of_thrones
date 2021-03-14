@@ -1,15 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
 import { Col, Row, Container } from "reactstrap";
 import Header from "../header";
 import RandomChar from "../randomChar";
-import CharacterPage from "../characterPage/characterPage";
+import CharacterPage from "../pages/characterPage/characterPage";
+import BooksPage from "../pages/booksPage/booksPage";
+import HousesPage from "../pages/housesPage/housesPage";
 import ErrorMessage from "../errorMessage/errorMessage";
+import GotService from "../../services/gotService";
 
-class App extends React.Component {
+class App extends Component {
   state = {
     showChar: true,
     error: false,
   };
+
+  gotService = new GotService();
 
   componentDidCatch() {
     this.setState({
@@ -54,6 +59,8 @@ class App extends React.Component {
             </Col>
           </Row>
           <CharacterPage />
+          <BooksPage />
+          <HousesPage />
         </Container>
       </>
     );

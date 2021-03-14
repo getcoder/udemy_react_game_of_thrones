@@ -6,8 +6,12 @@
 }
 body {
     overflow-x: hidden;
-    background: url('img/got.jpeg') center center no-repeat;
-    background-size: cover;
+    background: url('img/got.jpeg') no-repeat;
+    background-size: 100vw;
     font-size: 16px;
     height: 100%;	
+}
+html body {
+    background-color: rgba(0,0,0,1.00);
+
 }
