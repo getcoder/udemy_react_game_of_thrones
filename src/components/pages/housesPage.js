@@ -1,9 +1,9 @@
 import React from "react";
-import ItemList from "../../itemList";
-import ItemDetails, { Field } from "../../itemDetails";
-import ErrorMessage from "../../errorMessage/errorMessage";
-import GotService from "../../../services/gotService";
-import RowBlock from "../../rowBlock/rowBlock";
+import ItemList from "../itemList";
+import ItemDetails, { Field } from "../itemDetails";
+import ErrorMessage from "../errorMessage/errorMessage";
+import GotService from "../../services/gotService";
+import RowBlock from "../rowBlock/rowBlock";
 
 class HousesPage extends React.Component {
   state = {

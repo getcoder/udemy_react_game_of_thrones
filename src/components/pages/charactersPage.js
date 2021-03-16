@@ -1,11 +1,11 @@
 import React from "react";
-import ItemList from "../../itemList";
-import ItemDetails, { Field } from "../../itemDetails";
-import ErrorMessage from "../../errorMessage/errorMessage";
-import GotService from "../../../services/gotService";
-import RowBlock from "../../rowBlock/rowBlock";
+import ItemList from "../itemList";
+import ItemDetails, { Field } from "../itemDetails";
+import ErrorMessage from "../errorMessage/errorMessage";
+import GotService from "../../services/gotService";
+import RowBlock from "../rowBlock/rowBlock";
 
-class CharacterPage extends React.Component {
+class CharactersPage extends React.Component {
   state = {
     selectedChar: 130,
     error: false,
@@ -54,4 +54,4 @@ class CharacterPage extends React.Component {
   }
 }
 
-export default CharacterPage;
+export default CharactersPage;
