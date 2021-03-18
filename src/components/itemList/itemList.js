@@ -1,23 +1,18 @@
 import React, { Component } from "react";
 // import Spinner from "reactstrap/lib/Spinner";
-import Spinner from "../spinner/spinner";
+import PropTypes from "prop-types";
+import { withData } from "../hoc/withData";
 
 import "./itemList.css";
 
-export default class ItemList extends Component {
-  state = {
-    itemList: null,
+class ItemList extends Component {
+  static defaultProps = {
+    onItemSelected: () => {},
   };
 
-  componentDidMount() {
-    const { getData } = this.props;
-
-    getData().then((itemList) => {
-      this.setState({
-        itemList,
-      });
-    });
-  }
+  static propTypes = {
+    onItemSelected: PropTypes.func,
+  };
 
   renderItems(arr) {
     return arr.map((item) => {
@@ -35,10 +30,11 @@ export default class ItemList extends Component {
   }
 
   render() {
-    const { itemList } = this.state;
+    const { data } = this.props;
+    const items = this.renderItems(data);
 
-    const content = itemList ? this.renderItems(itemList) : <Spinner />;
-
-    return <ul className="item-list list-group">{content}</ul>;
+    return <ul className="item-list list-group">{items}</ul>;
   }
 }
+
+export default withData(ItemList);

@@ -23,13 +23,15 @@ class BooksPage extends React.Component {
     }
 
     return (
-      <ItemList
-        getData={this.gotService.getAllBooks}
-        onItemSelected={(itemId) => {
-          this.props.history.push(itemId);
-        }}
-        renderItem={({ name, numberOfPages }) => `${name} (${numberOfPages})`}
-      />
+      <div className="mb-4">
+        <ItemList
+          getData={this.gotService.getAllBooks}
+          onItemSelected={(itemId) => {
+            this.props.history.push(itemId);
+          }}
+          renderItem={({ name, numberOfPages }) => `${name} (${numberOfPages})`}
+        />
+      </div>
     );
   }
 }
