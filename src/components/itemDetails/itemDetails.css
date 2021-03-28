@@ -1,18 +1,18 @@
 .item-details {
-    background-color: #fff;
-    padding: 25px 25px 15px 25px;
-    margin-bottom: 40px;
+  background-color: #fff;
+  padding: 25px 25px 15px 25px;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
 .item-details h4 {
-    margin-bottom: 20px;
-    text-align: center;
+  margin-bottom: 20px;
 }
 
 .select-error {
-    display: block;
-    align-items: center;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    font-size: 26px;
+  display: block;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-size: 26px;
 }

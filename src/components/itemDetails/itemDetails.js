@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import GotService from "../../services/gotService";
+import React, { useState, useEffect } from "react";
+import { withData } from "../hoc/withData";
 
 import "./itemDetails.css";
 
@@ -12,41 +12,23 @@ const Field = ({ item, field, label }) => {
   );
 };
 
-export default class ItemDetails extends Component {
-  state = {
-    item: null,
-  };
+export { Field };
 
-  gotService = new GotService();
+function ItemDetails({ itemId, getData, children, data = {} }) {
+  const [item, setItem] = useState(data);
 
-  componentDidMount() {
-    this.updateItem();
-  }
+  useEffect(() => {
+    setItem(data);
+    renderItem(item);
+  });
 
-  componentDidUpdate(prevProps) {
-    if (this.props.itemId !== prevProps.itemId) {
-      this.updateItem();
-    }
-  }
-
-  updateItem = () => {
-    const { itemId, getData } = this.props;
-
-    if (!itemId) {
-      return;
-    }
-
-    getData(itemId).then((item) => this.setState({ item }));
-  };
-
-  renderItem = (item) => {
+  const renderItem = (item) => {
     const { name } = item;
-
     return (
       <>
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
-          {React.Children.map(this.props.children, (child) => {
+          {React.Children.map(children, (child) => {
             return React.cloneElement(child, { item });
           })}
         </ul>
@@ -54,16 +36,13 @@ export default class ItemDetails extends Component {
     );
   };
 
-  render() {
-    const { item } = this.state;
+  const content = item ? (
+    renderItem(item)
+  ) : (
+    <span className="select-error">Select an item</span>
+  );
 
-    const content = item ? (
-      this.renderItem(item)
-    ) : (
-      <span className="select-error">Select an item</span>
-    );
-    return <div className="item-details rounded">{content}</div>;
-  }
+  return <div className="item-details rounded">{content}</div>;
 }
 
-export { Field };
+export default withData(ItemDetails);

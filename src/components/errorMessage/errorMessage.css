@@ -1,8 +1,11 @@
-.random-block img {
-  width: 100%;
-}
-.random-block .errorMsg {
-  display: block;
+.error-block {
+  background-color: #fff;
+  padding: 25px 25px 15px 25px;
   margin: 0 auto;
+  margin-bottom: 20px;
   text-align: center;
+}
+
+.error-block img {
+  width: 100%;
 }

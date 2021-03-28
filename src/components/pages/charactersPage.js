@@ -1,57 +1,34 @@
-import React from "react";
-import ItemList from "../itemList";
-import ItemDetails, { Field } from "../itemDetails";
-import ErrorMessage from "../errorMessage/errorMessage";
+import React, { useState } from "react";
+import ItemList from "../itemList/itemList";
+import ItemDetails, { Field } from "../itemDetails/itemDetails";
 import GotService from "../../services/gotService";
 import RowBlock from "../rowBlock/rowBlock";
 
-class CharactersPage extends React.Component {
-  state = {
-    selectedChar: 130,
-    error: false,
+export default function CharactersPage() {
+  const [selectedChar, setSelectedChar] = useState("130");
+
+  const gotService = new GotService();
+
+  const onItemSelected = (id) => {
+    setSelectedChar(id);
   };
 
-  gotService = new GotService();
+  const itemList = (
+    <ItemList
+      getData={gotService.getAllCharacters}
+      onItemSelected={onItemSelected}
+      renderItem={({ name, gender }) => `${name} (${gender})`}
+    />
+  );
 
-  componentDidCatch() {
-    this.setState({
-      error: true,
-    });
-  }
+  const charDetails = (
+    <ItemDetails itemId={selectedChar} getData={gotService.getCharacter}>
+      <Field field="gender" label="Gender" />
+      <Field field="born" label="Born" />
+      <Field field="died" label="Died" />
+      <Field field="culture" label="Culture" />
+    </ItemDetails>
+  );
 
-  onItemSelected = (id) => {
-    this.setState({
-      selectedChar: id,
-    });
-  };
-
-  render() {
-    if (this.state.error) {
-      return <ErrorMessage />;
-    }
-
-    const itemList = (
-      <ItemList
-        getData={this.gotService.getAllCharacters}
-        onItemSelected={this.onItemSelected}
-        renderItem={({ name, gender }) => `${name} (${gender})`}
-      />
-    );
-
-    const charDetails = (
-      <ItemDetails
-        itemId={this.state.selectedChar}
-        getData={this.gotService.getCharacter}
-      >
-        <Field field="gender" label="Gender" />
-        <Field field="born" label="Born" />
-        <Field field="died" label="Died" />
-        <Field field="culture" label="Culture" />
-      </ItemDetails>
-    );
-
-    return <RowBlock left={itemList} right={charDetails} />;
-  }
+  return <RowBlock left={itemList} right={charDetails} />;
 }
-
-export default CharactersPage;

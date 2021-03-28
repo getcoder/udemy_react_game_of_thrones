@@ -1,14 +1,12 @@
 import React from "react";
-import './errorMessage.css'
-import img from './error.jpg'
+import "./errorMessage.css";
+import img from "./error.jpg";
 
-const ErrorMessage = () => {
+export default function ErrorMessage() {
   return (
-    <>
+    <div className="error-block">
       <img src={img} alt="error" />
-      <span className='errorMsg'>Something gone wrong</span>
-    </>
+      <span className="errorMsg">Something gone wrong</span>
+    </div>
   );
-};
-
-export default ErrorMessage;
+}
